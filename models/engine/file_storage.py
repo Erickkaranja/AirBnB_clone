@@ -9,20 +9,22 @@ class FileStorage:
     '''declaring class file storage.'''
 
     def __init__(self):
-        '''constructor to class file storage.'''
-        self.__file_path= ~/AirBnB_clone/file.json
-        self.__objects = []
-
+        '''constructor to class file storage.
+        Attributes:
+        __file_path(str): The name of the file to save objects to.
+        __objects(dict): A dictionary of objects.
+        '''
+    __file_path = "file.json"
+    __objects = {}
     def all(self):
         '''returns the dict object.'''
 
-        return (self.__object)
+        return (self.__objects)
 
     def new(self, obj):
         '''sets objects with keys <obj class name>.id.'''
 
-        self.__objects.append(__class__.__name__.id)
-        return (self.__objects)
+        self.__objects[{}.{}.format(type(obj).__name__, obj.id)] = obj
 
     def save(self):
         '''serializes __objects to the JSON file.'''
