@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 '''Defining class BaseModel.'''
 
-import storage
 import uuid
 from datetime import datetime
 
@@ -11,8 +10,16 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        self.created_at = datetime.utcnow()
+        self.updated_at = datetime.utcnow()
+
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "created_at" or "upadated_at":
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+
+                if key != "__class__":
+                    setattr(self, key, value)
 
     def __str__(self):
         '''prints the class name, id and dict representation of object.'''
@@ -22,10 +29,12 @@ class BaseModel:
     def save(self):
         '''updates the public instance attribute updated_at with the current
             datetime.'''
-        updated_at = datetime.now()
+        updated_at = datetime.utcnow()
 
     def to_dict(self):
         '''returns a dictionary containing all keys/values.'''
-        self.created_at = self.created_at.isoformat()
-        self.updated_at = self.updated_at.isoformat()
-        return self.__dict__
+        my_dict = self.__dict__.copy()
+        my_dict["__class__"] = str(type(self).__name__)
+        my_dict["created_at"] = self.created_at.isoformat()
+        my_dict["updated_at"] = self.updated_at.isoformat()
+        return my_dict
