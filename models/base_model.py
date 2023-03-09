@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 '''Defining class BaseModel.'''
 
+import storage
 import uuid
 from datetime import datetime
 
