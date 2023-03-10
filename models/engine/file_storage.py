@@ -2,6 +2,14 @@
 '''initializes class filestorage'''
 
 import json
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 
 class FileStorage:
     '''declaring class file storage.'''
@@ -18,7 +26,7 @@ class FileStorage:
     def all(self):
         '''returns the dict object.'''
 
-        return (self.__objects)
+        return fileself.__objects
 
     def new(self, obj):
         '''sets objects with keys <obj class name>.id.'''
@@ -34,7 +42,13 @@ class FileStorage:
 
     def reload(self):
         ''' deserializes the JSON file to __objects.'''
-        if self.__file_path is != 0:
-            with open(self.__file_path, "r") as obj:
-                obj_new = obj.loads(obj)
-        return obj_new
+        try:
+            with open(FileStorage.__file_path) as f:
+                objdict = json.load(f)
+                for o in objdict.values():
+                    class_name = o["__class__"]
+                    del o["__class__"]
+                    self.new(eval(class_name)(**o))
+
+        except FileNotFoundError:
+            return
