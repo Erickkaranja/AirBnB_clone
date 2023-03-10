@@ -2,14 +2,20 @@
 '''initializing class HBNBCommand.'''
 
 import cmd
-#from models.base_model import BaseModel
+from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     '''implementing class HBNBCommand.'''
+
     prompt = '(hbnb) '
     __classes = {
         "BaseModel",
-        "User"
+        "User",
+        "State",
+        "City",
+        "Amenity",
+        "Place",
+        "Review"
     }
 
     def do_EOF(self, line):

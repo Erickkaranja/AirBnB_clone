@@ -2,8 +2,6 @@
 '''initializes class filestorage'''
 
 import json
-from models.base_model import BaseModel
-
 
 class FileStorage:
     '''declaring class file storage.'''
@@ -16,6 +14,7 @@ class FileStorage:
         '''
     __file_path = "file.json"
     __objects = {}
+
     def all(self):
         '''returns the dict object.'''
 
