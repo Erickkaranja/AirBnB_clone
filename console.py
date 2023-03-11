@@ -13,12 +13,14 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 def parse(arg):
     curly_braces = re.search(r"\{9.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
     if curly_braces is None:
         if brackets is None:
-            return [i.strip(",") for i in split(arg)
+            return [i.strip(",") for i in split(arg)]
+
         else:
             lexer = split(arg[:brackets.span()[0]])
             retl = [i.strip(",") for i in lexer]
@@ -26,9 +28,11 @@ def parse(arg):
             return retl
     else:
         lexer = split(arg[:curly_braces.span()[0]])
+
         retl = [i.strip(",") for i in lexer]
         retl.append(curly_braces.group())
         return retl
+
 
 class HBNBCommand(cmd.Cmd):
     '''implementing class HBNBCommand.
@@ -74,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, arg):
         '''quits the program through an interrupt ctrl+D'''
-        print ("")
+        print ""
         return True
 
     def do_quit(self, arg):
@@ -136,7 +140,7 @@ class HBNBCommand(cmd.Cmd):
         '''
         argl = parse(arg)
         if len(argl) > 0 and argl[0] not in HBNBCommand.__classes:
-            print("")
+            print("** class doesn't exist **")
         else:
             objl = []
             for objl in storage.all().values():
@@ -158,6 +162,57 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def do_update(self, arg):
+        '''Usage: update <class> <id> <attribute_name> <attribute_value> or
+        <class>.update(<id>, <attribute_name>, <attribute_value>)
+        <class>.update(<id>, <dictionary>)
+        update a class instance of a given id by adding or updating
+        a given attribute key/value pair or dictionary.
+        '''
+        argl = parse(arg)
+        objdict = storage.all()
+
+        if len(argl) == 0:
+            print("** class name missing **")
+            return False
+        if arg[0] not in HBNBComand.__classes:
+            print("** class doesn't exist **")
+            return False
+        if len(argl) == 1:
+            print("** instance id missing **")
+            return False
+        if "".format(argl[0], argl[1]) not in objdict.keys():
+            print("** no instance found **")
+            return False
+        if len(argl) == 2:
+            print("** attribute name missing **")
+            return False
+        if len(argl) == 3:
+            try:
+                type(eval(argl[2])) != dict
+            except NameError:
+                print("** value missing **")
+                return False
+
+        if len(argl) == 4:
+            obj = objdict["{}.{}".format(argl[0], argl[1])]
+            if argl[2] in obj.__class__.dict__.keys():
+                valtype = type(obj.__class__.__dict__[argl[2]])
+                obj.__dict__[argl[2]] = valtype(argl[3])
+            else:
+                obj.__dict__[argl[2]] = argl[3]
+        elif type(eval(argl[2])) == dict:
+            obj = objdict["{}.{}".format(argl[0], argl[1])]
+            for k, v in eval(argl[2]).items():
+
+                if (k in obj.__class__.__dict__.keys() and
+                        type(obj.__class__.__dict__[k]) in {str, int, float}):
+                    valtype = type(obj.__class__.__dict__[k])
+                    obj.__dict__[k] = valtype(v)
+                else:
+                    obj.__dict__[k] = v
+
+        storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
