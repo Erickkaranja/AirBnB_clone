@@ -1,11 +1,12 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 '''initializes class state.'''
 
-from base_model import BaseModel
+from models.base_model import BaseModel
 
-class state(BaseModel):
-    '''Defing class statethat inherits from BaseModel.'''
 
-    def __init__(self):
-        '''constructor to class state.'''
-        self.name = ""
+class State(BaseModel):
+    '''Defing class statethat inherits from BaseModel.
+    Attributes:
+        name (str): Name of the state.
+    '''
+    name = ""

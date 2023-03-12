@@ -12,33 +12,33 @@ from models.review import Review
 
 
 class FileStorage:
-    '''declaring class file storage.'''
+    '''declaring class file storage.
+    Attributes:
+    __file_path(str): The name of the file to save objects to.
+    __objects(dict): A dictionary of objects.
+    '''
 
-    def __init__(self):
-        '''constructor to class file storage.
-        Attributes:
-        __file_path(str): The name of the file to save objects to.
-        __objects(dict): A dictionary of objects.
-        '''
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
         '''returns the dict object.'''
 
-        return fileself.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         '''sets objects with keys <obj class name>.id.'''
 
-        self.__objects[{}.{}.format(type(obj).__name__, obj.id)] = obj
+        ocname = obj.__class__.__name__
+        FileStorage.__objects["{}.{}".format(ocname, obj.id)] = obj
 
     def save(self):
         '''serializes __objects to the JSON file.'''
 
-        json_string = json.dumps(self.__objects)
-        with open(self.__file_path, "w") as jsonfile:
-            jsonfile.write(json_string)
+        odict = FileStorage.__objects
+        objdict = {obj: odict[obj].to_dict() for obj in odict.keys()}
+        with open(FileStorage.__file_path, "w") as f:
+            json.dump(objdict, f)
 
     def reload(self):
         ''' deserializes the JSON file to __objects.'''

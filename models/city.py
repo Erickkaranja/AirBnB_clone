@@ -1,12 +1,14 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 '''initializing class city.'''
 
-from base_model import BaseModel
+from  models.base_model import BaseModel
 
-class city(BaseModel):
-    '''defining class city inheriting from BaseModel.'''
 
-    def __init__(self):
-        '''constructor to class city.'''
-        self.state_id = ""
-        self.name = ""
+class City(BaseModel):
+    '''defining class city inheriting from BaseModel.
+    Attributes:
+        state_id (str): state's id.
+        name (str): Name of the state.
+    '''
+    state_id = ""
+    name = ""
