@@ -1,0 +1,119 @@
+/*
+* --Global style--
+*/
+/* styling filters.*/
+
+.filters {
+color: white;
+height: 70px;
+width: 100%;
+border: 1px #DDDDDD;
+border-radius: 4px;
+
+    }
+
+.filters button {
+font-size: 18px;
+border: none;
+background color: #FF5A5F;
+text color: #FFFFFF;
+width: 20%;
+height: 48px;
+border-radius: 4px;
+float: right;
+margin: 12px 30px;
+
+    }
+
+/* search button hover opacity*/
+.filters button:hover {
+background-color: rgba(255, 90, 95, .9);
+
+    }
+
+.amenities,
+.location {
+  display: inline-block;
+  width: 25%;
+  height: 100;
+
+    }
+.location {
+border-right: 1px solid #DDDDDD;
+
+    }
+/* header styles */
+.filters h3,
+.filters h2,
+.filters h4 {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+     box-sizing: border-box;
+
+    }
+/*Header 3 style */
+
+.filters h3 {
+  font-size: 1.17em;
+  font-weight: 600;
+  height: 50%;
+  padding: 15.5px 0 0 30px;
+
+    }
+/*Header 4 style*/
+.filters h4 {
+  font-size: 14px;
+  font-weight: 400;
+  height: 50;
+  padding: 4.5px 0 12px 30px;
+
+    }
+/* location and amenities style */
+.filter .locations,
+.filters .amenities {
+  display: inline-block;
+  height: 100%;
+  position: relative;
+  width: 25%;
+
+    }
+/* location border */
+.filter .locations {
+  border-right: 1px solid #ddd;
+    }
+
+.filters .locations:hover,
+.filters .amenities:hover {
+  background-color: #fafafa;
+    }
+
+/* location and amenities popover styles */
+.filters .popover {
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: none;
+  position: absolute;
+  width: 100%;
+}
+
+/*location and amenities popover hover */
+.filters .locations:hover .popover,
+.filters .amenities:hover .popover {
+  diplay: block;
+
+    }
+
+.filters .locations ul {
+ padding: 6px 0 6px 0;
+
+    }
+
+.filters .locations li {
+  margin: 12px auto 12px 3em;
+
+    }
+
+.filters .amenities li {
+  margin: 12px auto 12px 30px;
+}

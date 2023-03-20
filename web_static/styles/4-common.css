@@ -1,0 +1,19 @@
+/*
+ * --Global style--
+ */
+/* common/body style */
+
+.container {
+max-width: 1000px;
+margin: 30px auto;
+}
+
+body {
+color: #484848;
+font: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+
+}
+
+strong {
+font-weight: bold;
+}

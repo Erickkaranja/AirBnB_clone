@@ -3,7 +3,13 @@
 */
 /*footer syle*/
 footer {
-    color: #00FF00;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    background-color: #00FF00;
     height:60px;
     width:100%;
 }
